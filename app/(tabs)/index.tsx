@@ -1,47 +1,21 @@
-import { useEffect, useState } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 
-type User = {
-  id: number;
-  email: string;
-  created_at: string;
-};
-
 export default function HomeScreen() {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
-    fetch("http://192.168.0.16:3000/users")
-      .then((res) => res.json())
-      .then((data: User[]) => {
-        setUsers(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Fetch error:", err);
-        setLoading(false);
-      });
-  }, []);
-
+  const onLogOut = async () => {
+    // Ta bort token från AsyncStorage
+    await AsyncStorage.removeItem("token");
+    // Navigera tillbaka till inloggningssidan
+    router.replace("/login");
+  };
   return (
-    <View style={{ padding: 20 }}>
-      {loading ? (
-        <Text>Laddar...</Text>
-      ) : (
-        users.map((user) => (
-          <View key={user.id} style={{ marginBottom: 10 }}>
-            <Text>Email: {user.email}</Text>
-            <Text>
-              Registrerad: {new Date(user.created_at).toLocaleString()}
-            </Text>
-          </View>
-        ))
-      )}
-      <TouchableOpacity onPress={() => router.push("/login" as any)}>
-        <Text>Gå till Login</Text>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>Välkommen till appen 🎉</Text>
+      <TouchableOpacity onPress={onLogOut}>
+        <Text>Logga ut</Text>
       </TouchableOpacity>
     </View>
   );
