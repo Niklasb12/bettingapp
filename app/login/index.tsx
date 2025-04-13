@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { SafeAreaView, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { InteractionManager } from "react-native";
@@ -42,9 +48,19 @@ const Login = () => {
         value={password}
         onChangeText={setPassword}
       />
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={styles.buttonText}>Logga in</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <Text style={styles.buttonText}>Sign in</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            router.push("/register" as any);
+          }}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Don't have an account? Sign up</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };

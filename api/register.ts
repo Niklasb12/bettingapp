@@ -1,21 +1,22 @@
-import { RegisterResponse } from "@/types/register"; // om du har baseUrl "@/"
+import { RegisterFormValues } from "@/types/register"; // om du har baseUrl "@/"
 
-export const register = async (
-  firstname: string,
-  lastname: string,
-  username: string,
-  email: string,
-  password: string
-): Promise<RegisterResponse> => {
+export const register = async (form: RegisterFormValues) => {
+  const { confirmPassword, ...payload } = form; // Skicka inte confirm
+
   const res = await fetch("http://192.168.0.16:3000/register", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ firstname, lastname, username, email, password }),
+    body: JSON.stringify(payload),
   });
 
+  const contentType = res.headers.get("content-type");
   if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.message || "Register failed");
+    try {
+      const errorJson = await res.json();
+      throw new Error(errorJson.message || "Registration failed");
+    } catch {
+      throw new Error("Registration failed");
+    }
   }
 
   return await res.json();
