@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   SafeAreaView,
   Text,
@@ -15,14 +15,14 @@ import { RegisterFormValues } from "@/types/register";
 
 const Register = () => {
   const router = useRouter();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [firstname, setFirstname] = React.useState("");
-  const [lastname, setLastname] = React.useState("");
-  const [username, setUsername] = React.useState("");
-  const [errors, setErrors] = React.useState<Partial<RegisterFormValues>>({});
-  const [regError, setRegError] = React.useState<string | null>(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [username, setUsername] = useState("");
+  const [errors, setErrors] = useState<Partial<RegisterFormValues>>({});
+  const [regError, setRegError] = useState<string | null>(null);
 
   const onPress = async () => {
     const form: RegisterFormValues = {

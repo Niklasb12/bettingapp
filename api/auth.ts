@@ -1,10 +1,11 @@
 import { LoginResponse } from "@/types/auth"; // om du har baseUrl "@/"
+import { API_URL } from "@/constants/api";
 
 export const login = async (
   email: string,
   password: string
 ): Promise<LoginResponse> => {
-  const res = await fetch("http://192.168.0.16:3000/login", {
+  const res = await fetch(`${API_URL}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
