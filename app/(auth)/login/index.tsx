@@ -21,7 +21,7 @@ const Login = () => {
     try {
       const data = await login(email, password);
       await AsyncStorage.setItem("token", data.token);
-      router.replace("/(tabs)");
+      router.replace("/(drawer)/home" as any);
     } catch (err) {
       if (err instanceof Error) {
         alert(err.message);
