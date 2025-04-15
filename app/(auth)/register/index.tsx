@@ -38,6 +38,7 @@ const Register = () => {
       const formErrors = validateRegisterForm(form);
 
       if (Object.keys(formErrors).length > 0) {
+        alert("här..."); // 👈 Visa loading spinner
         setErrors(formErrors); // 👈 Visa fel i UI
         return;
       }
@@ -75,7 +76,7 @@ const Register = () => {
           onChangeText={setLastname}
           value={lastname}
         />
-        {errors.firstname && (
+        {errors.lastname && (
           <Text style={{ color: "red" }}>{errors.lastname}</Text>
         )}
       </View>
@@ -86,7 +87,7 @@ const Register = () => {
           onChangeText={setUsername}
           value={username}
         />
-        {errors.firstname && (
+        {errors.username && (
           <Text style={{ color: "red" }}>{errors.username}</Text>
         )}
       </View>
@@ -97,9 +98,7 @@ const Register = () => {
           onChangeText={setEmail}
           value={email}
         />
-        {errors.firstname && (
-          <Text style={{ color: "red" }}>{errors.email}</Text>
-        )}
+        {errors.email && <Text style={{ color: "red" }}>{errors.email}</Text>}
       </View>
       <View style={styles.inputContainer}>
         <TextInput
@@ -109,7 +108,7 @@ const Register = () => {
           onChangeText={setPassword}
           value={password}
         />
-        {errors.firstname && (
+        {errors.password && (
           <Text style={{ color: "red" }}>{errors.password}</Text>
         )}
       </View>
@@ -121,7 +120,7 @@ const Register = () => {
           onChangeText={setConfirmPassword}
           value={confirmPassword}
         />
-        {errors.firstname && (
+        {errors.confirmPassword && (
           <Text style={{ color: "red" }}>{errors.confirmPassword}</Text>
         )}
       </View>

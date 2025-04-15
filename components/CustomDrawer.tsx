@@ -65,6 +65,16 @@ export default function CustomDrawer(props: any) {
           activeTintColor="#007AFF"
           activeBackgroundColor="transparent"
         />
+        <DrawerItem
+          label="Matches"
+          icon={({ color, size }) => (
+            <Ionicons name="person-outline" size={size} color={color} />
+          )}
+          onPress={() => router.push("/(drawer)/matches")}
+          focused={props.state.index === 1}
+          activeTintColor="#007AFF"
+          activeBackgroundColor="transparent"
+        />
       </View>
 
       {/* Logga ut längst ner */}
